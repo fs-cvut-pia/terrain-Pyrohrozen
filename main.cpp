@@ -3,6 +3,9 @@
 #include <vector>
 #include <iostream>
 #include <string>
+#include "letadlo.cpp"
+#include "lod.cpp"
+#include "silnice.cpp"
 
 // Include files of your path classes will need to be added here
 
@@ -33,11 +36,11 @@ int main(int argc, char *argv[]) {
     Point start = read_coordinates(argc,argv,2);
     Point finish = read_coordinates(argc,argv,4);
 
-    std::vector<Path*> paths = { //new YourPath(m,"MyPathName",start,finish), ...
+    std::vector<Path*> paths = {new Letadlo(m,"letadlo",start,finish),new Lod(m,"lod",start,finish),new Silnice(m,"silnice",start,finish) //new YourPath(m,"MyPathName",start,finish), ...
         // Here add the list of dynamically created classes with path finding algorithms
     };
-
-    for (auto& p : paths) {
+    //new Letadlo(m,"letadlo",start,finish)
+   for (auto& p : paths) {
         std::cout << "Path search: " << p->getName() << std::endl;
         std::cout << "=============" << std::endl;
         p->find();
@@ -46,6 +49,7 @@ int main(int argc, char *argv[]) {
         p->saveToFile();
         delete p;
     }
+
 
     return 0;
 }
